@@ -17,6 +17,20 @@ uv tool install zotero-mcp-server
 
 ## 3. 注册到 Claude Code（Web API 模式）
 
+一键脚本（安装 + 注册）：
+
+```bash
+# 云端会话（key 存为 api.zotero.org 的 network secret，由代理注入）
+ZOTERO_LIBRARY_ID=<你的 userID> ./setup.sh
+```
+
+```bash
+# 本地电脑
+ZOTERO_LIBRARY_ID=<你的 userID> ZOTERO_API_KEY=<你的 API Key> ./setup.sh
+```
+
+或手动：
+
 ```bash
 claude mcp add zotero -s user \
   -e ZOTERO_LOCAL=false \
