@@ -55,7 +55,26 @@ claude mcp add zotero -s user -e ZOTERO_LOCAL=true -- zotero-mcp serve
 claude mcp list
 ```
 
-## 4. 用法示例
+## 4. Skill：Organize Zotero
+
+`.claude/skills/organize-zotero/` 是一个 Claude Code skill（`setup.sh` 会同时把它装到 `~/.claude/skills/`）。
+在 Claude Code 里说 "用 Organize Zotero 整理 LLC 文件夹" 即可，它会：
+
+- 让每篇论文（不是每个 Zotero 条目）在主文件夹出现一次、在所属子文件夹各出现一次
+- 合并同一篇论文的重复条目（保留批注最多的，其余移到回收站）
+- 把原生 `/Useful` 标签转换成 Ethereal Style 的 `#Useful`
+- **向文件夹添加或删除条目前都会先征求你的同意**
+
+底层脚本 `scripts/organize_zotero.py`：
+
+```bash
+export ZOTERO_LIBRARY_ID=<你的 userID>
+uv run --with pyzotero scripts/organize_zotero.py plan "LLC" --out plan.json   # 只读，生成计划
+uv run --with pyzotero scripts/organize_zotero.py retag /Useful '#Useful'      # 改标签
+uv run --with pyzotero scripts/organize_zotero.py apply plan.json --sections add merge   # 执行（需先确认）
+```
+
+## 5. 用法示例
 
 在 Claude Code 里直接说：
 

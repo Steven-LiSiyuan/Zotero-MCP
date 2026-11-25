@@ -33,3 +33,8 @@ claude mcp add zotero -s user \
   -- "$HOME/.local/bin/zotero-mcp" serve
 
 claude mcp list | grep zotero
+
+# Install the repo's skills (e.g. organize-zotero) for every project
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+mkdir -p "$HOME/.claude/skills"
+cp -r "$SCRIPT_DIR/.claude/skills/." "$HOME/.claude/skills/"
